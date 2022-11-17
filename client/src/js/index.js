@@ -4,6 +4,7 @@ import { initDb, getDb, postDb, deleteDb } from "./database";
 import { fetchCards } from "./cards";
 import { toggleForm, clearForm } from "./form";
 
+
 // import css file
 import "../css/index.css";
 
@@ -22,6 +23,23 @@ if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register('./service-worker.js')
   })
 }
+
+const installBtn = document.getElementById("installBtn");
+
+window.addEventListener('beforeinstallprompt', (event) => {
+  event.preventDefault();
+  installBtn.style.visibility = "visible";
+
+  installBtn.addEventListener('click', () => {
+    event.prompt();
+    installBtn.setAttribute('disabled', true);
+    installBtn.textContent = 'Installed!';
+  });
+})
+
+window.addEventListener('appinstalled', (event) => {
+  console.log('👍', 'appinstalled', event);
+})
 
 // Add images on load
 window.addEventListener('load', function () {
