@@ -16,6 +16,12 @@ import Logo from '../images/logo.png';
 import Bear from '../images/bear.png';
 import Dog from '../images/dog.png';
 
+if ('serviceWorker' in navigator) {
+  //  Use the window load event to keep the page load perfrmant
+  window.addEventListener('load', ()=> {
+    navigator.serviceWorker.register('./service-worker.js')
+  })
+}
 
 // Add images on load
 window.addEventListener('load', function () {

@@ -1,6 +1,10 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+// const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const { InjectManifest } = require('workbox-webpack-plugin');
 
 const path = require('path');
+
+
   module.exports = {
     entry: './src/js/index.js',
     output: {
@@ -35,6 +39,10 @@ const path = require('path');
         new HtmlWebpackPlugin({
             template: './index.html',
             title: 'Webpack Plugin',
+        }),
+        new InjectManifest({
+          swSrc: './src/sw.js',
+          swDest: 'service-worker.js',
         })
       ]
   };
